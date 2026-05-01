@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ekipi_shkencors",
+  "info": {
+    "singularName": "ekipi-shkencor",
+    "pluralName": "ekipi-shkencors",
+    "displayName": "Ekipi Shkencor"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid"
+    },
+    "role": {
+      "type": "string"
+    },
+    "speciality": {
+      "type": "string"
+    },
+    "bio": {
+      "type": "blocks"
+    },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}
