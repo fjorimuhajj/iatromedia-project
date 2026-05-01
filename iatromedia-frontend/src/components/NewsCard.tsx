@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { getStrapiMediaUrl } from "@/lib/strapi";
 
 type NewsCardProps = {
   slug: string;
@@ -20,39 +19,53 @@ export function NewsCard({
   imageUrl,
   imageAlt,
 }: NewsCardProps) {
-  return (
-    <article className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md">
-      {imageUrl ? (
-        <Link href={`/news/${slug}`} className="block">
-          <img
-            src={getStrapiMediaUrl(imageUrl)}
-            alt={imageAlt || title}
-            className="h-56 w-full object-cover"
-          />
-        </Link>
-      ) : null}
+  const shortExcerpt =
+    excerpt.length > 220 ? `${excerpt.slice(0, 220)}...` : excerpt;
 
-      <div className="p-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-sky-700">
-          {category}
+  return (
+    <article className="overflow-hidden bg-transparent transition-[filter] duration-150 hover:brightness-[0.985]">
+      <Link href={`/news/${slug}`} className="group block">
+        <div className="relative w-full bg-[#c9c3c3] aspect-[1150/460]">
+          {imageUrl ? (
+            <img
+              src={imageUrl}
+              alt={imageAlt || title}
+              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.01]"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center text-gray-600">
+              Nuk ka imazh
+            </div>
+          )}
+        </div>
+      </Link>
+
+      <div className="bg-[#e0e0e0] px-5 py-5 md:px-6">
+        {category ? (
+          <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-[#4d4d4d]">
+            {category}
+          </p>
+        ) : null}
+
+        <Link href={`/news/${slug}`}>
+          <h2 className="mb-5 text-[24px] font-semibold leading-[1.3] text-[#1d1d1d]">
+            {title}
+          </h2>
+        </Link>
+
+        <p className="mb-6 text-[16px] leading-[1.9] text-[#2f2f2f]">
+          {shortExcerpt}
         </p>
 
-        <h2 className="mt-3 text-xl font-bold leading-snug text-gray-900">
-          <Link href={`/news/${slug}`} className="transition hover:text-sky-700">
-            {title}
-          </Link>
-        </h2>
-
-        <p className="mt-3 text-sm leading-6 text-gray-600">{excerpt}</p>
-
-        <div className="mt-6 flex items-center justify-between">
-          <span className="text-sm text-gray-500">{date}</span>
+        <div className="flex items-center justify-between gap-4">
+          <span className="text-[14px] text-[#555]">{date}</span>
 
           <Link
             href={`/news/${slug}`}
-            className="text-sm font-semibold text-sky-700 hover:underline"
+            className="inline-flex items-center gap-2 text-[15px] font-semibold text-[#1f1f1f] hover:underline"
           >
-            Read more
+            Lexo më shumë
+            <span className="text-[12px]">▶</span>
           </Link>
         </div>
       </div>
